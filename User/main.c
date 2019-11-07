@@ -1,5 +1,7 @@
 
 #include "stm32f4xx.h"
+#include "led.h"
+#include "key.h"
 
 static void SystemClock_Config(void);
 
@@ -13,8 +15,19 @@ int main(void)
     /* 系统时钟初始化成216 MHz */
     SystemClock_Config();
     /* 在这里添加你的代码^_^. */
-    HAL_GPIO_Init();
-    while(1);  
+    led_init();
+    key_init();
+    while(1){  
+
+       if(key_1_read()){
+           led_red_ctrl(1); 
+       }
+       /* HAL_Delay(1000);// 1000ms */
+       if(key_2_read()) {
+           led_red_ctrl(0); 
+       }
+       /* HAL_Delay(1000);// 1000ms */
+    }
 }
 
 /**
