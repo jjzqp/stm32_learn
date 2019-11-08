@@ -170,9 +170,24 @@ void SysTick_Handler(void)
   */
 void EXTI0_IRQHandler(void)
 {
-  
+    if(__HAL_GPIO_EXTI_GET_IT(KEY_1_PIN) != RESET) { 
+        //TODO
+        __HAL_GPIO_EXTI_CLEAR_IT(KEY_1_PIN);
+    }
 }
 
+/**
+  * @brief  This function handles External line 0 interrupt request.
+  * @param  None
+  * @retval None
+  */
+void EXIT15_10_IRQHandler(void)
+{
+    if(__HAL_GPIO_EXTI_GET_IT(KEY_2_PIN) != RESET) { 
+        //TODO
+        __HAL_GPIO_EXTI_CLEAR_IT(KEY_2_PIN);
+    }
+}
 /**
   * @brief  This function handles PPP interrupt request.
   * @param  None
