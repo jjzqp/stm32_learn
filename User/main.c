@@ -4,6 +4,7 @@
 #include "key.h"
 
 static void SystemClock_Config(void);
+static void System_HSIClock_Config(void);
 
 /**
   * @brief  主函数
@@ -13,21 +14,26 @@ static void SystemClock_Config(void);
 int main(void)
 {
     /* 系统时钟初始化成216 MHz */
-    SystemClock_Config();
+    //SystemClock_Config();
+	System_HSIClock_Config();
     /* 在这里添加你的代码^_^. */
     led_init();
     key_init();
-    while(1){  
+	//key_exit_config();
 
-       if(key_1_read()){
-           led_red_ctrl(1); 
-       }
-       /* HAL_Delay(1000);// 1000ms */
-       if(key_2_read()) {
-           led_red_ctrl(0); 
-       }
-       /* HAL_Delay(1000);// 1000ms */
+    while(1)
+#if 1
+			{  
+       //if(key_1_read()){
+           led_red_ctrl(ON); 
+       //}
+        HAL_Delay(500);
+       //if(key_2_read()) {
+           led_red_ctrl(OFF); 
+       //}
+       HAL_Delay(500);
     }
+#endif
 }
 
 /**
@@ -66,8 +72,8 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 15;
-  RCC_OscInitStruct.PLL.PLLN = 216;
+  RCC_OscInitStruct.PLL.PLLM = 25;
+  RCC_OscInitStruct.PLL.PLLN = 360;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 4;
   if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -115,27 +121,29 @@ static void System_HSIClock_Config(void)
 
   /** Configure the main internal regulator output voltage 
   */
-  __HAL_RCC_PWR_CLK_ENABLE();
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+  //__HAL_RCC_PWR_CLK_ENABLE();
+  //__HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  //RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLM = 8;
-  RCC_OscInitStruct.PLL.PLLN = 180;
+  RCC_OscInitStruct.PLL.PLLM = 25;
+	
+	
+  RCC_OscInitStruct.PLL.PLLN = 360;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 4;
+  RCC_OscInitStruct.PLL.PLLQ = 7;
   if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
-    while(1) {}
+    while(1) {;}
   }
 
   /* 激活 OverDrive 模式以达到180M频率 */
   if(HAL_PWREx_EnableOverDrive() != HAL_OK)
   {
-    while(1) {}
+    while(1) {;}
   }
  
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);

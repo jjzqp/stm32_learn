@@ -89,6 +89,7 @@
 #define HAL_HCD_MODULE_ENABLED
 
 
+
 /* ########################## HSE/HSI Values adaptation ##################### */
 /**
   * @brief Adjust the value of External High Speed oscillator (HSE) used in your application.
@@ -328,7 +329,8 @@
 #ifdef HAL_HCD_MODULE_ENABLED
  #include "stm32f4xx_hal_hcd.h"
 #endif /* HAL_HCD_MODULE_ENABLED */
-   
+  
+
 /* Exported macro ------------------------------------------------------------*/
 #ifdef  USE_FULL_ASSERT
 /**

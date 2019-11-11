@@ -47,6 +47,6 @@ void key_exit_config(void)
     GPIO_InitStructure.Pin = KEY_2_PIN;
     HAL_GPIO_Init(KEY_2_PORT,&GPIO_InitStructure);
     
-    HAL_NVIC_SetPriority(KEY_2_INT_EXTI_IRQ,0,0);
+    HAL_NVIC_SetPriority(KEY_2_INT_EXTI_IRQ,1,0);
     HAL_NVIC_EnableIRQ(KEY_2_INT_EXTI_IRQ);
 }

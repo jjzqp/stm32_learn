@@ -3,6 +3,9 @@
 
 #include "stm32f4xx_hal.h"
 
+#define ON   0
+#define OFF  1
+
 #define LED_RED_ENABLE()   __GPIOH_CLK_ENABLE()
 #define LED_RED_PORT       GPIOH 
 #define LED_RED_PIN        GPIO_PIN_10 

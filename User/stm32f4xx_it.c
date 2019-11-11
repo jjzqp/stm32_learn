@@ -172,6 +172,7 @@ void EXTI0_IRQHandler(void)
 {
     if(__HAL_GPIO_EXTI_GET_IT(KEY_1_PIN) != RESET) { 
         //TODO
+				led_red_ctrl(ON);
         __HAL_GPIO_EXTI_CLEAR_IT(KEY_1_PIN);
     }
 }
@@ -181,11 +182,13 @@ void EXTI0_IRQHandler(void)
   * @param  None
   * @retval None
   */
-void EXIT15_10_IRQHandler(void)
+void EXTI15_10_IRQHandler(void)
 {
     if(__HAL_GPIO_EXTI_GET_IT(KEY_2_PIN) != RESET) { 
         //TODO
+				led_red_ctrl(OFF);
         __HAL_GPIO_EXTI_CLEAR_IT(KEY_2_PIN);
+				
     }
 }
 /**

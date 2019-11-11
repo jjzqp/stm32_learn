@@ -10,7 +10,7 @@ int led_init(void)
     //init gpio
     GPIO_InitTypeDef GPIO_InitStructure;
     GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP; 
-    GPIO_InitStructure.Pull = GPIO_PULLUP; 
+    GPIO_InitStructure.Pull = GPIO_NOPULL; 
     GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH; 
     GPIO_InitStructure.Pin = LED_RED_PIN;
     HAL_GPIO_Init(LED_RED_PORT, &GPIO_InitStructure);
