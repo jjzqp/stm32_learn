@@ -1,7 +1,6 @@
 
 #include "stm32f4xx.h"
-#include "led.h"
-#include "key.h"
+#include "main.h"
 
 static void SystemClock_Config(void);
 static void System_HSIClock_Config(void);
@@ -13,13 +12,15 @@ static void System_HSIClock_Config(void);
   */
 int main(void)
 {
+	HAL_Init();
     /* 系统时钟初始化成216 MHz */
-    //SystemClock_Config();
-	System_HSIClock_Config();
+  SystemClock_Config();
+	//System_HSIClock_Config();
     /* 在这里添加你的代码^_^. */
     led_init();
     key_init();
-	//key_exit_config();
+	//key_exit_config(); //Exit 
+    usart_init();
 
     while(1)
 #if 1
@@ -32,6 +33,8 @@ int main(void)
            led_red_ctrl(OFF); 
        //}
        HAL_Delay(500);
+       usart_send((uint8_t*)"hello world\n");
+
     }
 #endif
 }

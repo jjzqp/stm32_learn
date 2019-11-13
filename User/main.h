@@ -41,6 +41,8 @@
 #include "stm32f4xx_hal.h"
 #include "led.h"
 #include "key.h"
+#include "sys_tick.h"
+#include "uart.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

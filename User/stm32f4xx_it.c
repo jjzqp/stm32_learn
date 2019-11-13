@@ -36,8 +36,9 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+
 #include "stm32f4xx_it.h"
+#include "main.h"
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -153,7 +154,8 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-  HAL_IncTick();
+  HAL_IncTick();  //系统滴答计时
+	//sys_tick_deal();
 }
 
 /******************************************************************************/
