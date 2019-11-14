@@ -22,18 +22,22 @@ int main(void)
 	//key_exit_config(); //Exit 
     usart_init();
 
+       usart_send((uint8_t*)"hello world\n");
+	printf("hhhhhhaaabbb\n");
+	
+	
+
     while(1)
 #if 1
 			{  
        //if(key_1_read()){
-           led_red_ctrl(ON); 
+                LED_RED();
        //}
         HAL_Delay(500);
        //if(key_2_read()) {
-           led_red_ctrl(OFF); 
+                LED_OFF();
        //}
        HAL_Delay(500);
-       usart_send((uint8_t*)"hello world\n");
 
     }
 #endif

@@ -25,59 +25,59 @@ int led_blue_ctrl(unsigned char onoff);
 
 #define LED_OFF()        \
         do { \
-            led_red_ctrl(0); \
-            led_green_ctrl(0); \
-            led_blue_ctrl(0); \
+            led_red_ctrl(OFF); \
+            led_green_ctrl(OFF); \
+            led_blue_ctrl(OFF); \
         }while(0)
 
 #define LED_RED()        \
         do { \
-            led_red_ctrl(1); \
-            led_green_ctrl(0); \
-            led_blue_ctrl(0); \
+            led_red_ctrl(ON); \
+            led_green_ctrl(OFF); \
+            led_blue_ctrl(OFF); \
         }while(0)
 
 #define LED_GREEN()        \
         do { \
-            led_red_ctrl(0); \
-            led_green_ctrl(1); \
-            led_blue_ctrl(0); \
+            led_red_ctrl(OFF); \
+            led_green_ctrl(ON); \
+            led_blue_ctrl(OFF); \
         }while(0)
 
 #define LED_BLUE()        \
         do { \
-            led_red_ctrl(0); \
-            led_green_ctrl(0); \
-            led_blue_ctrl(1); \
+            led_red_ctrl(OFF); \
+            led_green_ctrl(OFF); \
+            led_blue_ctrl(ON); \
         }while(0)
 
 #define LED_YELLOW()        \
         do { \
-            led_red_ctrl(1); \
-            led_green_ctrl(1); \
-            led_blue_ctrl(0); \
+            led_red_ctrl(ON); \
+            led_green_ctrl(ON); \
+            led_blue_ctrl(OFF); \
         }while(0)
 
 #define LED_PURPLE()        \
         do { \
-            led_red_ctrl(1); \
-            led_green_ctrl(0); \
-            led_blue_ctrl(1); \
+            led_red_ctrl(ON); \
+            led_green_ctrl(OFF); \
+            led_blue_ctrl(ON); \
         }while(0)
 
 //青
 #define LED_CYAN()        \
         do { \
-            led_red_ctrl(0); \
-            led_green_ctrl(1); \
-            led_blue_ctrl(1); \
+            led_red_ctrl(OFF); \
+            led_green_ctrl(ON); \
+            led_blue_ctrl(ON); \
         }while(0)
 
 #define LED_WHITE()        \
         do { \
-            led_red_ctrl(1); \
-            led_green_ctrl(1); \
-            led_blue_ctrl(1); \
+            led_red_ctrl(ON); \
+            led_green_ctrl(ON); \
+            led_blue_ctrl(ON); \
         }while(0)
 #endif
 

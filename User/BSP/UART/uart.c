@@ -53,8 +53,6 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 
     // RX
     _uart_io.Pin = DEBUG_UART_RX_IO_PIN;  
-    _uart_io.Pull = GPIO_NOPULL;
-    _uart_io.Mode = GPIO_MODE_INPUT; 
     _uart_io.Alternate = DEBUG_UART_AF;  //复用为usart1
     HAL_GPIO_Init(DEBUG_UART_RX_IO_PORT,&_uart_io);
 

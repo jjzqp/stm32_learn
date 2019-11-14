@@ -18,6 +18,8 @@ int led_init(void)
     HAL_GPIO_Init(LED_RED_PORT, &GPIO_InitStructure);
     GPIO_InitStructure.Pin = LED_BLUE_PIN;
     HAL_GPIO_Init(LED_RED_PORT, &GPIO_InitStructure);
+	
+		LED_OFF();
     return 0;
 }
 
