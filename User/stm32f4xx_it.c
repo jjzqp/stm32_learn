@@ -202,8 +202,17 @@ void EXTI15_10_IRQHandler(void)
 {
 }*/
 
+void DEBUG_UART_IRQ_Handler(void)
+{
+    uint8_t ch;
+    if(get_uart_it_flag()){
+        //产生接收中断	
+        ch = read_uart_dr_reg();
+        write_uart_dr_reg(ch);
+    }
+}
 /**
-  * @}
+ * @}
   */ 
 
 /**
