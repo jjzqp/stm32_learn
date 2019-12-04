@@ -4,3 +4,8 @@
 *.map
 *.lst
 
+cscope.input
+cscope.out
+filenametags
+tags
+Output/
