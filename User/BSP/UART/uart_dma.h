@@ -27,7 +27,7 @@
 #define DEBUG_DMA_UART_STREAM          DMA2_Stream7  //存储器到uart外设
 #define DEBUG_DMA_UART_CHANNEL         DMA_CHANNEL_4
 
-#define DUBUG_DMA_UART_ENABLE()        __DMA2_CLK_ENABLE()
+#define DUBUG_DMA_ENABLE()        __DMA2_CLK_ENABLE()
 
 int usart_dma_init(void);
 int usart_dma_config(void);

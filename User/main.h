@@ -43,6 +43,7 @@
 #include "key.h"
 #include "sys_tick.h"
 #include "uart.h"
+#include "uart_dma.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

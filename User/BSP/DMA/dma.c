@@ -67,6 +67,7 @@ int dma_test()
         printf("Buf Transfer succ\n" );
     } else {
         printf("Buf Transfer faild!!!\n");
+				return -1;
     }
 		
 		return 0;

@@ -17,6 +17,8 @@ int usart_dma_init(void)
     uart_dma.Init.Mode = UART_MODE_TX_RX; //收发模式
     HAL_UART_Init(&uart_dma);
     __HAL_UART_ENABLE_IT(&uart_dma,UART_IT_RXNE); //使能接收中断
+	
+		usart_dma_config();
     return 0;
 }
 //外部定义usart硬件相关函数
@@ -48,7 +50,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 /**** 关联dma  ****/
 int usart_dma_config(void)
 {
-   DEBUG_DMA_UART_CLK_ENABLE();
+   DUBUG_DMA_ENABLE();
    //指定uart1 tx数据流7 通道4
    dma_handle.Instance = DEBUG_DMA_UART_STREAM;
    dma_handle.Init.Channel = DEBUG_DMA_UART_CHANNEL;
@@ -57,7 +59,7 @@ int usart_dma_config(void)
    dma_handle.Init.MemInc = DMA_MINC_ENABLE; //使能内存地址递增
    dma_handle.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;//字节对齐
    dma_handle.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;//字节对齐(8 bit)
-   dma_handle.Init.Mode = DMA_CIRCULAR; // 循环传输
+   dma_handle.Init.Mode = DMA_NORMAL; // 单次传输
    dma_handle.Init.Priority = DMA_PRIORITY_MEDIUM;//中等优先级
    dma_handle.Init.FIFOMode = DMA_FIFOMODE_DISABLE;//禁用FIFO
    dma_handle.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
@@ -79,6 +81,26 @@ void uart_dma_send(uint8_t *buf,int size)
 {
     HAL_UART_Transmit_DMA(&uart_dma,(uint8_t*)(buf),size); 
 }
+//重定向c库printf
+int fputc(int c,FILE *f)
+{
+    HAL_UART_Transmit(&uart_dma,(uint8_t*)&c,1,1000); 
+    return c;
+}
+#define BUFF_LEN     50
+char buf[BUFF_LEN];
+int uart_dma_test()
+{
+	usart_dma_init();
+	
 
+
+	///for(int i=0;i<BUFF_LEN;i++){
+	///	buf[i] = 'c';
+	///}
+  ///uart_dma_send((uint8_t*)buf,BUFF_LEN);
+	
+	return 0;
+}
 #endif
 
