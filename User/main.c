@@ -20,12 +20,18 @@ int main(void)
     led_init();
     key_init();
 	//key_exit_config(); //Exit 
-    usart_init();
+	
+  //usart_init();
+  //usart_send((uint8_t*)"hello world\n");
 
-       usart_send((uint8_t*)"hello world\n");
-	printf("hhhhhhaaabbb\n");
+	//extern int dma_test();
+	//if(dma_test()){
+	//	return 0;
+	//}
 	
+	usart_dma_init();
 	
+	printf("\n HELLO WORLD!!!\n");
 
     while(1)
 #if 1

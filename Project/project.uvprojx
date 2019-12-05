@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM32F429I_DISCO</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_HAL_Driver\Inc;..\User;..\User\BSP\LED;..\User\BSP\KEY;..\User\BSP\SYSTICK;..\User\BSP\UART</IncludePath>
+              <IncludePath>..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_HAL_Driver\Inc;..\User;..\User\BSP;..\User\BSP\LED;..\User\BSP\KEY;..\User\BSP\SYSTICK;..\User\BSP\UART;..\User\BSP\DMA</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -4997,6 +4997,16 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
+            </File>
+            <File>
+              <FileName>dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\BSP\DMA\dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\BSP\UART\uart_dma.c</FilePath>
             </File>
             <File>
               <FileName>uart.c</FileName>

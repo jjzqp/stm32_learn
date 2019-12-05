@@ -1,6 +1,6 @@
-
+#include "bsp_cfg.h"
 #include "uart.h"
-
+#include "uart_dma.h"
 
 static UART_HandleTypeDef uart;
 
@@ -21,7 +21,7 @@ void write_uart_dr_reg(uint8_t ch)
 {
     WRITE_REG(uart.Instance->DR,ch);//回显
 }
-
+#ifndef UART_DMA_DEBUG
 int usart_init(void)
 {
     
@@ -40,8 +40,10 @@ int usart_init(void)
 void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 {
 
+	
     GPIO_InitTypeDef _uart_io;
-	DEBUG_UART_CLK_ENABLE();   
+	
+		DEBUG_UART_CLK_ENABLE();   
     DEBUG_UART_IO_CLK_ENABLE();
     // TX
     _uart_io.Pin = DEBUG_UART_TX_IO_PIN;  
@@ -84,4 +86,4 @@ int fgetc(FILE *f)
     HAL_UART_Receive(&uart,(uint8_t *)&c,1,0xFFFF);
     return c;
 }
-
+#endif
