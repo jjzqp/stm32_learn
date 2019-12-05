@@ -20,10 +20,10 @@ int main(void)
     led_init();
     key_init();
 	//key_exit_config(); //Exit 
-    usart_init();
+  //usart_init();
+  
+  //usart_send((uint8_t*)"hello world\n");
 
-       usart_send((uint8_t*)"hello world\n");
-	printf("hhhhhhaaabbb\n");
 	
 	
 

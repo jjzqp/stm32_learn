@@ -2,8 +2,8 @@
 #define __UART_H__
 
 #include "stm32f4xx_hal.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "bsp_cfg.h"
+
 
 
 #define DEBUG_UART            USART1
@@ -22,13 +22,18 @@
 #define DEBUG_UART_IRQ           USART1_IRQn
 #define DEBUG_UART_IRQ_Handler   USART1_IRQHandler
 
+#ifndef UART_DMA_DEBUG
 int usart_init(void);
+void usart_send(uint8_t *str);
+#endif
 uint8_t get_uart_it_flag(void);
 uint8_t read_uart_dr_reg(void);
 void write_uart_dr_reg(uint8_t ch);
 
-void usart_send(uint8_t *str);
+
+
 
 #endif
+
 
 
