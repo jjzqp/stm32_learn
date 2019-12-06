@@ -32,7 +32,10 @@ int main(void)
 	usart_dma_init();
 	
 	printf("\n HELLO WORLD!!!\n");
-
+	
+	extern void iic_test(void);
+	iic_test();
+printf("\n END!!!\n");
     while(1)
 #if 1
 			{  

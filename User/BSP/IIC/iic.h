@@ -21,7 +21,7 @@
 #define I2Cx_SDA_GPIO_PORT              GPIOB
 #define I2Cx_SDA_AF                     GPIO_AF4_I2C1
 
-int iic_init();
+int iic_init(void);
 int iic_send_one_byte(uint16_t slave_address,uint16_t write_address,uint8_t *data);
 int iic_send_buf(uint16_t slave_address,uint16_t write_address,uint8_t *data,uint16_t data_size);
 
