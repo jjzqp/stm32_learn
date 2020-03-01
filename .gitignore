@@ -1,0 +1,6 @@
+*.d
+*.o
+*.swp
+cscope.out
+filenametags
+tags
