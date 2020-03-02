@@ -93,25 +93,31 @@ __ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc_HS[USBD_CUSTOM_HID_REPORT_DES
 {
   /* USER CODE BEGIN 1 */
   /* 0x00, */
-    0x06, 0x00, 0xff,              // USAGE_PAGE (Vendor Defined Page 1)
-    0x09, 0x01,                    // USAGE (Vendor Usage 1)
-    0xa1, 0x01,                    // COLLECTION (Application)
-	
-    // The Input report 
-		0x09,0x03, // USAGE ID - Vendor defined 
-		0x15,0x00, // LOGICAL_MINIMUM (0) 
-		0x26,0x00, 0xFF, // LOGICAL_MAXIMUM (255) 
-		0x75,0x08, // REPORT_SIZE (8) 
-		0x95,64, // REPORT_COUNT :SendLength 
-		0x81,0x02, // INPUT (Data,Var,Abs) 
-		//19
-		// The Output report 
-		0x09,0x04, // USAGE ID - Vendor defined 
-		0x15,0x00, // LOGICAL_MINIMUM (0) 
-		0x26,0x00,0xFF, // LOGICAL_MAXIMUM (255) 
-		0x75,0x08, // REPORT_SIZE (8) 
-		0x95,64, // REPORT_COUNT:ReceiveLength 
-		0x91,0x02, // OUTPUT (Data,Var,Abs) 
+    0x05,0x01, // Global Generic Desktop
+    0x09,0x02, // Local Mouse
+    0xa1,0x01, // Main app collection
+    0x09,0x01, // Local Pointer
+    0xa1,0x00, // Main phy collection
+    0x95,0x03, // Global ReportCount
+    0x75,0x01, // Global ReportSize
+    0x05,0x09, // Global Button
+    0x19,0x01, // Local Usage Min
+    0x29,0x03, // Local Usage Max
+    0x15,0x00, // Global Logical Min
+    0x25,0x01, // Global Logical Max
+    0x81,0x02, // Main Input(Data,Var,Abs)
+    0x95,0x01, // Global ReportCount
+    0x75,0x05, // Global ReportSize
+    0x81,0x03, // Main Input(Cnsr,Var,Abs)
+    0x95,0x03,0x75,0x08, // Global ReportCount Global ReportSize
+    0x05,0x01, // Global Generic Desktip
+    0x09,0x30, // Local X
+    0x09,0x31, // Local Y
+    0x09,0x38, // Locak Wheel
+    0x15,0x81, // Global Logical Min
+    0x25,0x7f, // Global Logical Max
+    0x81,0x06, // Main Input(Data,Var,Rel)
+    0xc0,      // Main End collection
   /* USER CODE END 1 */
    0xC0    /*     END_COLLECTION             */
 };

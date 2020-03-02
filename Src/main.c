@@ -60,6 +60,14 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+// HID Mouse
+struct mouseHID_t {
+    uint8_t buttons;
+    int8_t x;
+    int8_t y;
+    int8_t wheel;
+};
+struct mouseHID_t mouseHID;
 
 /* USER CODE END 0 */
 
@@ -117,7 +125,12 @@ int main(void)
 			printf("%s\n",uart_recv_buf);//callback show
 		}
 		HAL_Delay(3000);
-		USBD_CUSTOM_HID_SendReport(&hUsbDeviceHS, send_buf, sizeof(send_buf));
+        mouseHID.buttons = 0;
+        mouseHID.x = 100;
+        mouseHID.y = 0;
+        mouseHID.wheel = 0;
+		/* USBD_CUSTOM_HID_SendReport(&hUsbDeviceHS, send_buf, sizeof(send_buf)); */
+        USBD_CUSTOM_HID_SendReport(&hUsbDeviceHS, (uint8_t*)&mouseHID, sizeof(struct mouseHID_t));
 		
   }
   /* USER CODE END 3 */
