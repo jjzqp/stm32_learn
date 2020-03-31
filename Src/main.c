@@ -21,13 +21,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "dma.h"
+#include "fatfs.h"
 #include "usart.h"
-#include "usb_device.h"
+#include "usb_host.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "usbd_customhid.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -48,26 +49,20 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-extern USBD_HandleTypeDef hUsbDeviceHS;
 uint8_t send_buf[3] = {1,2,3};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void MX_USB_HOST_Process(void);
+
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-// HID Mouse
-struct mouseHID_t {
-    uint8_t buttons;
-    int8_t x;
-    int8_t y;
-    int8_t wheel;
-};
-struct mouseHID_t mouseHID;
+extern ApplicationTypeDef Appli_state;
 
 /* USER CODE END 0 */
 
@@ -78,7 +73,9 @@ struct mouseHID_t mouseHID;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+    uint8_t wtext[] = "The site is STM32cube.com working with FatFs"; 
+    uint32_t *wlen;
+    FRESULT ret;
   /* USER CODE END 1 */
   
 
@@ -102,7 +99,8 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_USART1_UART_Init();
-  MX_USB_DEVICE_Init();
+  MX_FATFS_Init();
+  MX_USB_HOST_Init();
   /* USER CODE BEGIN 2 */
 	__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);          //
 	HAL_UART_Receive_DMA(&huart1,uart_recv_buf,1024);
@@ -114,23 +112,34 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+    MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
 #if 0
 		HAL_GPIO_TogglePin(LED_R_GPIO_Port, LED_R_Pin);
 		HAL_Delay(1000);
 #endif
-		if(uart_recv_flag){
-			uart_recv_flag = 0;
-			printf("%s\n",uart_recv_buf);//callback show
-		}
-		HAL_Delay(3000);
-        mouseHID.buttons = 0;
-        mouseHID.x = 100;
-        mouseHID.y = 0;
-        mouseHID.wheel = 0;
-		/* USBD_CUSTOM_HID_SendReport(&hUsbDeviceHS, send_buf, sizeof(send_buf)); */
-        USBD_CUSTOM_HID_SendReport(&hUsbDeviceHS, (uint8_t*)&mouseHID, sizeof(struct mouseHID_t));
+        if(Appli_state == APPLICATION_READY) {
+            printf("hello udisk\n");
+            if(f_mount(&USBHFatFS,(TCHAR*)USBHPath,0) != FR_OK) {
+                Error_Handler();
+            } else {
+                if(f_open(&USBHFile,"stm32.txt",FA_CREATE_ALWAYS|FA_WRITE) != FR_OK) {
+                    Error_Handler();
+                } else {
+                    ret = f_write(&USBHFile,wtext,sizeof(wtext),(void*)&wlen); 
+                    if(wlen == 0 || ret != FR_OK) {
+                        Error_Handler();
+                    } else {
+                        //ok
+                        f_close(&USBHFile);
+                        printf("write ok\n");
+                    }
+                }
+            }
+            Appli_state = APPLICATION_DISCONNECT;
+            
+        }
 		
   }
   /* USER CODE END 3 */
@@ -190,6 +199,7 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
+    printf("err!!!\n");
 
   /* USER CODE END Error_Handler_Debug */
 }
